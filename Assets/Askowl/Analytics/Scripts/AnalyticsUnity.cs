@@ -1,6 +1,5 @@
 ﻿namespace Askowl {
   using System.Collections;
-  using System.Collections.Generic;
   using Decoupled;
   using JetBrains.Annotations;
 
@@ -11,23 +10,21 @@
   }
 
   public sealed class AnalyticsUnityService : Analytics {
-    public override void
-      Event(string name, string action, string result, [NotNull] params object[] more) {
-      UnityEngine.Analytics.Analytics.CustomEvent(name, new Dictionary<string, object> {
-        {"action", action},
-        {"result", result},
-        {"more", More(more)}
-      });
+    public override void Event(string                    name,
+                               string                    action,
+                               string                    result,
+                               [NotNull] params object[] more) {
+      UnityEngine.Analytics.Analytics.CustomEvent(name, ToDictionary(action, result, more));
     }
 
     [UsedImplicitly]
-    public override Genders Gender {
+    public override string Gender {
       set {
         switch (value) {
-          case Genders.Male:
+          case "Male":
             UnityEngine.Analytics.Analytics.SetUserGender(UnityEngine.Analytics.Gender.Male);
             break;
-          case Genders.Female:
+          case "Female":
             UnityEngine.Analytics.Analytics.SetUserGender(UnityEngine.Analytics.Gender.Female);
             break;
           default:

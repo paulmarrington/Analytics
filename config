@@ -1,5 +1,5 @@
 declare -- framework="Unity"
-declare -- packages=""
+declare -- packages="firebase_unity_sdk/FirebaseAnalytics.unitypackage"
 declare -- local_packages="Askowl/Assets Askowl/Build Askowl/Coroutines Askowl/Decoupler Askowl/UI Askowl/Build"
 declare -- quote_count="50"
 declare -- fact_count="100"

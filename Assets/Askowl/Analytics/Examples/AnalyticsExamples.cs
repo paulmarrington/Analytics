@@ -14,11 +14,12 @@ public class AnalyticsExamples : MonoBehaviour {
 
   [UsedImplicitly]
   public void EventExampleButton() {
-    log.Event("AnalyticsExamples", "Test Event", "Shown in Log", "More 1", 33, true);
+    log.Event("AnalyticsExamples", "Test Event", "Shown in Log",
+              "button=", "EventExampleButton", "count=", 33, true);
   }
 
   [UsedImplicitly]
   public void ErrorExampleButton() {
-    log.Error("Test Error", "Shown in Log also", "More 2", 333, false);
+    log.Error("Test Error", "Shown in Log also", "button=", "ErrorExampleButton", 44, false);
   }
 }
