@@ -3,7 +3,7 @@
   using JetBrains.Annotations;
 
   public sealed class AnalyticsUnity : Singleton<AnalyticsUnity> {
-    private void Awake() { Analytics.Load<AnalyticsUnityService>(); }
+    private void Awake() { Analytics.Register<AnalyticsUnityService>(); }
   }
 
   public sealed class AnalyticsUnityService : Analytics {
