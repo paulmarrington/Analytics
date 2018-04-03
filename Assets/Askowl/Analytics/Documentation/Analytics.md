@@ -6,4 +6,4 @@
 
 ## Introduction
 
-Analytics attempts to record and summarise the data you need from game-play to manage your relationship with your players. It is useful to 
+Analytics attempts to record and summarise the data you need from game-play to manage your relationship with your players. It is 
