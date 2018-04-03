@@ -1,12 +1,9 @@
 ﻿namespace Askowl {
-  using System.Collections;
   using Decoupled;
   using JetBrains.Annotations;
 
   public sealed class AnalyticsUnity : Singleton<AnalyticsUnity> {
-    private IEnumerator Start() {
-      yield return AnalyticsUnityService.Register<AnalyticsUnityService>();
-    }
+    private void Awake() { Analytics.Load<AnalyticsUnityService>(); }
   }
 
   public sealed class AnalyticsUnityService : Analytics {

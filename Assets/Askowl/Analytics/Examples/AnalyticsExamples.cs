@@ -1,16 +1,11 @@
-﻿using System.Collections;
-using Decoupled;
+﻿using Decoupled;
 using JetBrains.Annotations;
 using UnityEngine;
 
-public class AnalyticsExamples : MonoBehaviour {
+public sealed class AnalyticsExamples : MonoBehaviour {
   private Analytics log;
 
-  private IEnumerator Start() {
-    yield return new WaitForSeconds(0.2f);
-
-    log = Analytics.Instance;
-  }
+  private void Start() { log = Analytics.Instance; }
 
   [UsedImplicitly]
   public void EventExampleButton() {
