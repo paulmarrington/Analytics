@@ -70,13 +70,13 @@ Set the player gender in the analytics network. `Authentication` triggers the ev
       set {
         switch (value) {
           case "Male":
-            UnityEngine.Analytics.Analytics.SetUserGender(UnityEngine.Analytics.Gender.Male);
+            Analytics.SetUserGender(UnityEngine.Analytics.Gender.Male);
             break;
           case "Female":
-            UnityEngine.Analytics.Analytics.SetUserGender(UnityEngine.Analytics.Gender.Female);
+            Analytics.SetUserGender(UnityEngine.Analytics.Gender.Female);
             break;
           default:
-            UnityEngine.Analytics.Analytics.SetUserGender(UnityEngine.Analytics.Gender.Unknown);
+            Analytics.SetUserGender(UnityEngine.Analytics.Gender.Unknown);
             break;
         }
       }
@@ -86,8 +86,67 @@ Set the player gender in the analytics network. `Authentication` triggers the ev
 Set the player birth year in the analytics network. `Authentication` triggers the event.
 ```C#
     public override int BirthYear {
-      set { UnityEngine.Analytics.Analytics.SetUserBirthYear(value); }
+      set { Analytics.SetUserBirthYear(value); }
     }
 ```
 
 ## Adding an Analytics Network
+Let's say you are going to create an interface to Fabric.
+
+Firstly we must find out whether the Fabric Unity package exists. Install Fabric and look for a directory unique to it. Create a script in an ***Editor*** directory called ***DetectFabric.cs***.
+
+```C#
+  using UnityEditor;
+  using Askowl;
+
+  [InitializeOnLoad]
+  public sealed class DetectFabric : DefineSymbols {
+    static DetectFabric() {
+      bool usable = HasFolder("Fabric");
+      AddOrRemoveDefines(addDefines: usable, named: "FabricAnalytics");
+    }
+}
+```
+
+Next, create a C# script ***AnalyticsFabric.cs***. It is an unusual case where the script file holds two classes.
+
+```C#
+#if FabricAnalytics
+  using Decoupled;
+
+  public sealed class AnalyticsFabric : Singleton<AnalyticsFabric> {
+    private void Awake() { Analytics.Register<AnalyticsFabricService>(); }
+  }
+
+  public sealed class AnalyticsFabricService : Analytics {
+    public virtual void Error(string name, string message, params object[] more) {
+      // Only override if a distinct error condition is required
+      // Event(name: name, action: "Error", result: message, more: more);
+    }
+
+    public override void Event(string  name, string action, string result, params object[] more) {
+      // call the Fabric method to record a custom event.
+      // Use *More* or *ToDictionary* to record the additional information.
+    }
+    
+    public override string Gender {
+      set {
+        switch (value) {
+          case "Male": /* tell Fabric */ break;
+          case "Female": /* tell Fabric */ break;
+          case "Other": /* tell Fabric */ break;
+          case "Unknown": /* tell Fabric */ break;
+        }
+      }
+    }
+    
+    public override int BirthYear {
+      set { /* tell Fabric */ }
+    }
+  }
+}
+#endif
+```
+This script has a singleton MonoBehaviour whose sole task is to register the Fabric API. That API class exists in the same file because it is never needed elsewhere. Unless the editor script can find the Fabric package, No API registration occurs. The preprocessor takes care of that for us.
+
+Create an empty GameObject and rename it to ***Fabric Analytics***. Attach ***AnalyticsFabric.cs*** as a component. Drag the resulting GameObject into a prefabs folder for reuse.
