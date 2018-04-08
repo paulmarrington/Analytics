@@ -1,12 +1,9 @@
 ﻿namespace Askowl {
   using Decoupled;
   using JetBrains.Annotations;
+  using UnityEngine;
 
-  public sealed class AnalyticsUnity : Singleton<AnalyticsUnity> {
-    private void Awake() { Analytics.Register<AnalyticsUnityService>(); }
-  }
-
-  public sealed class AnalyticsUnityService : Analytics {
+  public sealed class AnalyticsUnity : Analytics {
     public override void Event(string                    name,
                                string                    action,
                                string                    result,
@@ -35,5 +32,8 @@
     public override int BirthYear {
       set { UnityEngine.Analytics.Analytics.SetUserBirthYear(value); }
     }
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void RegisterService() { Register<AnalyticsUnity>(); }
   }
 }
