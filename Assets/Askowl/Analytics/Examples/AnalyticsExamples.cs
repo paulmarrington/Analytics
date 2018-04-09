@@ -1,4 +1,5 @@
-﻿using Decoupled;
+﻿#if UNITY_EDITOR
+using Decoupled;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -18,3 +19,4 @@ public sealed class AnalyticsExamples : MonoBehaviour {
     log.Error("Test Error", "Shown in Log also", "button=", "ErrorExampleButton", 44, false);
   }
 }
+#endif
