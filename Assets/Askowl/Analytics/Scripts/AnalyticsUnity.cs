@@ -11,7 +11,7 @@
       UnityEngine.Analytics.Analytics.CustomEvent(name, ToDictionary(action, result, more));
     }
 
-    [UsedImplicitly]
+    
     public override string Gender {
       set {
         switch (value) {
@@ -28,7 +28,7 @@
       }
     }
 
-    [UsedImplicitly]
+    
     public override int BirthYear {
       set { UnityEngine.Analytics.Analytics.SetUserBirthYear(value); }
     }
