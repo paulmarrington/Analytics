@@ -1,5 +1,1 @@
----
-redirect_to:
-  - /Assets/Askowl/Analytics/Documentation/Askowl-Analytics
----
-
+redirect_to:\n  - /Assets/Askowl/Analytics/Documentation/Askowl-Analytics

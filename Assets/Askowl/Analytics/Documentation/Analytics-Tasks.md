@@ -1,7 +1,12 @@
 # Askowl/Analytics
 ## Future Work
 
-* Plan future work
+* [ ] Add Fabric (if !UnityAnalytics.enabled)
+* [ ] Doc: Update
+* [ ] Doc: Connections from docx
 
-## Release x.x (month 201x)
+## Release 2018.06
+
+* [ ] Update tests
+* [ ] Update docx
 
