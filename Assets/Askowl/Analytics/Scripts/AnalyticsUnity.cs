@@ -13,7 +13,7 @@
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void RegisterService() {
-      if (UnityEngine.Analytics.Analytics.enabled) Register<AnalyticsUnity>();
+      if (UnityEngine.Analytics.Analytics.enabled) RegisterDefault<AnalyticsUnity>();
     }
   }
 }
