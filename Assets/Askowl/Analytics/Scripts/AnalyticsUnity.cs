@@ -7,7 +7,7 @@
     public override void Event(string                    name,
                                string                    action,
                                string                    result,
-                               [NotNull] params object[] more) {
+		    ){//[NotNull] params object[] more) {
       UnityEngine.Analytics.Analytics.CustomEvent(name, ToDictionary(action, result, more));
     }
 
